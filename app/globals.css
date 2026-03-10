@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F5F0E8;
+  --color-sand: #E8DCC8;
+  --color-olive: #8B9A6E;
+  --color-sage: #7A8C6E;
+  --color-forest: #1A3A2A;
+  --color-forest-light: #2A5A3A;
+  --color-terracotta: #C4603A;
+  --color-terracotta-light: #D4784E;
+  --color-ink: #0D0D0D;
+
+  --font-display: var(--font-bebas-neue), "Anton", "Impact", sans-serif;
+  --font-body: var(--font-dm-sans), "Helvetica Neue", sans-serif;
+  --font-story: var(--font-playfair-display), "Georgia", serif;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-forest);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Decorative dot grid pattern */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--color-sand) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Editorial rule line */
+.rule-line {
+  border: none;
+  height: 2px;
+  background: var(--color-sand);
+}
+
+/* Vertical stripe accent */
+.stripe-accent {
+  border-left: 4px solid var(--color-terracotta);
+}
+
+/* Story card base */
+.story-card {
+  border-top: 6px solid var(--color-terracotta);
+  background: white;
+  padding: 2rem;
+}
+
+/* Label style: editorial all-caps */
+.label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+/* Textarea focus */
+textarea:focus,
+input:focus {
+  outline: 2px solid var(--color-olive);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sand);
+  border-radius: 3px;
+}
