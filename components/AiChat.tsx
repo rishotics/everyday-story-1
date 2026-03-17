@@ -61,23 +61,40 @@ export default function AiChat() {
 
   return (
     <div>
-      <div className="flex items-center gap-4 mb-8">
-        <div className="h-[2px] w-8 bg-terracotta" />
-        <span className="label text-olive">Story Coach</span>
+      {/* Section header with number */}
+      <div className="flex items-start gap-5 mb-8">
+        <span className="section-number hidden sm:block">03</span>
+        <div className="pt-2">
+          <div className="flex items-center gap-3 mb-1">
+            <span className="text-terracotta text-[0.5rem]">✦</span>
+            <span className="label text-olive">Story Coach</span>
+          </div>
+          <p className="metadata">
+            AI-powered storytelling feedback
+          </p>
+        </div>
       </div>
 
       {/* Chat area */}
       <div
         ref={scrollRef}
-        className="bg-white rounded-sm border-2 border-sand h-96 overflow-y-auto p-6 mb-6 space-y-4"
+        className="bg-white rounded-sm border-2 border-sand h-96 overflow-y-auto p-6 mb-6 space-y-4 relative"
       >
         {messages.length === 0 && (
-          <div className="text-center py-12">
-            <p className="font-display text-3xl text-sand mb-4">
-              Ask About Your Stories
+          <div className="text-center py-16 relative">
+            <div className="aura-blob-terracotta left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" />
+            <p className="font-display text-4xl md:text-5xl text-sand mb-2 leading-tight relative z-10">
+              Ask About
+              <br />
+              Your Stories
             </p>
-            <p className="text-olive text-sm max-w-md mx-auto">
-              Your AI storytelling coach knows all your stories. Ask about
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="h-[1px] w-8 bg-sand" />
+              <span className="text-terracotta text-[0.5rem]">✦</span>
+              <div className="h-[1px] w-8 bg-sand" />
+            </div>
+            <p className="text-olive text-sm max-w-sm mx-auto relative z-10">
+              Your AI coach knows all your stories. Ask about
               patterns, get feedback, or explore themes.
             </p>
           </div>
@@ -86,7 +103,7 @@ export default function AiChat() {
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} animate-fade-in-up`}
           >
             <div
               className={`max-w-[80%] px-5 py-3 rounded-sm ${
@@ -95,6 +112,9 @@ export default function AiChat() {
                   : "bg-cream text-forest stripe-accent"
               }`}
             >
+              {msg.role === "assistant" && (
+                <span className="metadata block mb-1 text-olive">Coach</span>
+              )}
               <p className="font-body text-sm leading-relaxed whitespace-pre-wrap">
                 {msg.text}
               </p>
@@ -103,9 +123,10 @@ export default function AiChat() {
         ))}
 
         {loading && (
-          <div className="flex justify-start">
-            <div className="bg-cream text-olive px-5 py-3 rounded-sm stripe-accent">
-              <p className="font-body text-sm animate-pulse">Thinking...</p>
+          <div className="flex justify-start animate-fade-in-up">
+            <div className="bg-cream text-olive px-5 py-3 rounded-sm stripe-accent flex items-center gap-2">
+              <div className="w-3 h-3 border-2 border-olive border-t-transparent rounded-full animate-spin" />
+              <p className="metadata">Thinking...</p>
             </div>
           </div>
         )}
@@ -118,8 +139,9 @@ export default function AiChat() {
             <button
               key={s}
               onClick={() => sendMessage(s)}
-              className="label bg-cream border-2 border-sand px-4 py-2 rounded-sm text-olive hover:border-terracotta hover:text-terracotta transition-colors cursor-pointer text-xs"
+              className="bg-cream border-2 border-sand px-4 py-2 rounded-sm text-olive hover:border-terracotta hover:text-terracotta transition-colors cursor-pointer text-xs font-medium"
             >
+              <span className="text-terracotta text-[0.4rem] mr-1.5">✦</span>
               {s}
             </button>
           ))}

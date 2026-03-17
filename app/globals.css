@@ -9,6 +9,8 @@
   --color-forest-light: #2A5A3A;
   --color-terracotta: #C4603A;
   --color-terracotta-light: #D4784E;
+  --color-amber: #D4893A;
+  --color-golden: #E8913A;
   --color-ink: #0D0D0D;
 
   --font-display: var(--font-bebas-neue), "Anton", "Impact", sans-serif;
@@ -24,7 +26,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Decorative dot grid pattern */
+/* ============================================
+   DECORATIVE PATTERNS
+   ============================================ */
+
+/* Dot grid pattern */
 .dot-grid {
   background-image: radial-gradient(circle, var(--color-sand) 1px, transparent 1px);
   background-size: 24px 24px;
@@ -42,14 +48,79 @@ body {
   border-left: 4px solid var(--color-terracotta);
 }
 
-/* Story card base */
+/* Film grain overlay — analog warmth */
+.film-grain {
+  position: relative;
+}
+.film-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+
+/* Aura blob — soft radial glow */
+.aura-blob-terracotta {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(196, 96, 58, 0.12), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aura-blob-amber {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(212, 137, 58, 0.1), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aura-blob-olive {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(139, 154, 110, 0.1), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Rotated sidebar text */
+.sidebar-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  font-size: 0.625rem;
+  color: var(--color-sand);
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+/* Story card base — editorial with heavy top border */
 .story-card {
   border-top: 6px solid var(--color-terracotta);
   background: white;
   padding: 2rem;
+  position: relative;
 }
 
-/* Label style: editorial all-caps */
+/* Label style: editorial all-caps metadata */
 .label {
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -57,7 +128,38 @@ body {
   font-size: 0.75rem;
 }
 
-/* Textarea focus */
+/* Metadata style: monospace editorial numbers */
+.metadata {
+  font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  color: var(--color-olive);
+}
+
+/* Section number — oversized outline editorial markers */
+.section-number {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-sand);
+  user-select: none;
+}
+
+/* Star/sparkle accent */
+.star-accent::before {
+  content: "✦";
+  color: var(--color-terracotta);
+  font-size: 0.5rem;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+
+/* ============================================
+   INTERACTIVE ELEMENTS
+   ============================================ */
+
 textarea:focus,
 input:focus {
   outline: 2px solid var(--color-olive);
@@ -74,4 +176,36 @@ input:focus {
 ::-webkit-scrollbar-thumb {
   background: var(--color-sand);
   border-radius: 3px;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(8px, -6px); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.animate-float {
+  animation: subtleFloat 12s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: subtleFloat 18s ease-in-out infinite reverse;
 }

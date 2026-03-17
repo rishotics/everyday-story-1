@@ -2,11 +2,11 @@
 
 import { TabId } from "@/types";
 
-const tabs: { id: TabId; label: string }[] = [
-  { id: "write", label: "Write" },
-  { id: "browse", label: "Browse" },
-  { id: "ai", label: "AI Chat" },
-  { id: "export", label: "Export" },
+const tabs: { id: TabId; num: string; label: string }[] = [
+  { id: "write", num: "01", label: "Write" },
+  { id: "browse", num: "02", label: "Browse" },
+  { id: "ai", num: "03", label: "AI Chat" },
+  { id: "export", num: "04", label: "Export" },
 ];
 
 export default function TabNav({
@@ -17,18 +17,33 @@ export default function TabNav({
   onTabChange: (tab: TabId) => void;
 }) {
   return (
-    <nav className="flex gap-1 border-b-2 border-sand">
+    <nav className="flex gap-0 border-b-2 border-sand">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
-          className={`label px-6 py-4 transition-colors cursor-pointer ${
+          className={`group flex items-baseline gap-2 px-5 md:px-6 py-4 transition-all cursor-pointer ${
             activeTab === tab.id
-              ? "text-terracotta border-b-4 border-terracotta -mb-[2px] font-bold"
-              : "text-olive hover:text-forest"
+              ? "border-b-[3px] border-terracotta -mb-[2px]"
+              : "hover:bg-sand/30"
           }`}
         >
-          {tab.label}
+          <span
+            className={`metadata text-[0.6rem] transition-colors ${
+              activeTab === tab.id ? "text-terracotta" : "text-sand group-hover:text-olive"
+            }`}
+          >
+            {tab.num}
+          </span>
+          <span
+            className={`label transition-colors ${
+              activeTab === tab.id
+                ? "text-terracotta font-bold"
+                : "text-olive group-hover:text-forest"
+            }`}
+          >
+            {tab.label}
+          </span>
         </button>
       ))}
     </nav>
