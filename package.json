@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "repository": {
     "type": "git",
@@ -16,7 +18,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-    "bugs": {
+  "bugs": {
     "url": "https://github.com/rishotics/everyday-story-1/issues"
   },
   "homepage": "https://github.com/rishotics/everyday-story-1#readme",
@@ -33,5 +35,8 @@
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.7"
   }
 }
