@@ -1,0 +1,6 @@
+{
+  "crons": [
+    { "path": "/api/telegram/cron?slot=morning", "schedule": "30 4 * * *" },
+    { "path": "/api/telegram/cron?slot=night", "schedule": "30 19 * * *" }
+  ]
+}
