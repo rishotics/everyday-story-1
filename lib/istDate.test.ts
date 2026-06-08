@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { istDayRange, istMidnightUTC } from "@/lib/istDate";
+import { istDayForYMD, istDayRange, istMidnightUTC } from "@/lib/istDate";
 
 describe("istMidnightUTC", () => {
   it("maps 01:00 IST to that IST calendar day's midnight (in UTC)", () => {
@@ -23,5 +23,15 @@ describe("istDayRange", () => {
     // IST day 2026-05-05 spans 2026-05-04T18:30:00Z .. 2026-05-05T18:29:59.999Z
     expect(start.toISOString()).toBe("2026-05-04T18:30:00.000Z");
     expect(end.toISOString()).toBe("2026-05-05T18:29:59.999Z");
+  });
+});
+
+describe("istDayForYMD", () => {
+  it("returns IST-day boundaries and anchor for a given YMD", () => {
+    const r = istDayForYMD(2026, 6, 21);
+    // IST 2026-06-21 00:00 === 2026-06-20T18:30:00Z
+    expect(r.anchor.toISOString()).toBe("2026-06-20T18:30:00.000Z");
+    expect(r.start.toISOString()).toBe("2026-06-20T18:30:00.000Z");
+    expect(r.end.toISOString()).toBe("2026-06-21T18:29:59.999Z");
   });
 });

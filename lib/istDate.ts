@@ -13,3 +13,14 @@ export function istDayRange(now: Date = new Date()): { start: Date; end: Date } 
   const end = new Date(start.getTime() + 86_400_000 - 1);
   return { start, end };
 }
+
+/** IST-day boundaries + anchor (start) for a calendar date in IST. */
+export function istDayForYMD(
+  y: number,
+  m: number,
+  d: number
+): { start: Date; end: Date; anchor: Date } {
+  const anchor = new Date(Date.UTC(y, m - 1, d) - IST_OFFSET_MS);
+  const end = new Date(anchor.getTime() + 86_400_000 - 1);
+  return { start: anchor, end, anchor };
+}
