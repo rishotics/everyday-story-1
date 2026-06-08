@@ -33,6 +33,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: true });
     }
 
+    if (/^\/help\b/i.test(message.text.trim())) {
+      await sendMessage(
+        chatId,
+        [
+          "Commands:",
+          "• /today <text> — save to today",
+          "• /yesterday <text> — save to yesterday",
+          "• /dd-mm-yy <text> — save to a specific date (e.g. /21-04-26)",
+          "• /dd-mm-yyyy <text> — same, 4-digit year",
+          "• /help — this message",
+          "",
+          "Any message without a command is appended to today's story.",
+        ].join("\n")
+      );
+      return NextResponse.json({ ok: true });
+    }
+
     const parsed = parseDateCommand(message.text, new Date());
 
     if (parsed.kind === "error") {
